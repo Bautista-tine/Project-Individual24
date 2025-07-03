@@ -15,7 +15,10 @@ class FavoritesScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Favorites'), backgroundColor: Colors.pink[100]),
+      appBar: AppBar(
+        title: const Text('Favorites'),
+        backgroundColor: Colors.pink[100],
+      ),
       body: favorites.isEmpty
           ? const Center(child: Text('No favorites yet.'))
           : ListView.builder(
@@ -23,6 +26,8 @@ class FavoritesScreen extends StatelessWidget {
         itemCount: favorites.length,
         itemBuilder: (context, index) {
           final item = favorites[index];
+          final String title = item['title']!;
+
           return Container(
             margin: const EdgeInsets.only(bottom: 15),
             decoration: BoxDecoration(
@@ -33,11 +38,19 @@ class FavoritesScreen extends StatelessWidget {
             child: ListTile(
               leading: ClipRRect(
                 borderRadius: BorderRadius.circular(6),
-                child: Image.asset(item['image']!, width: 50, height: 50, fit: BoxFit.cover),
+                child: Image.asset(
+                  item['image']!,
+                  width: 50,
+                  height: 50,
+                  fit: BoxFit.cover,
+                ),
               ),
               title: Text(
                 item['title']!,
-                style: TextStyle(color: Colors.purple[900], fontWeight: FontWeight.bold),
+                style: TextStyle(
+                  color: Colors.purple[900],
+                  fontWeight: FontWeight.bold,
+                ),
               ),
               subtitle: Text(item['description']!),
               trailing: IconButton(
@@ -45,14 +58,19 @@ class FavoritesScreen extends StatelessWidget {
                 onPressed: () => onToggleFavorite(item),
               ),
               onTap: () {
-                Navigator.push(context, MaterialPageRoute(
-                  builder: (_) => TutorialScreen(
-                    title: item['title']!,
-                    imagePath: item['image']!,
-                    description: item['description']!,
-                    steps: getTutorialSteps(item['title']!),
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (_) => TutorialScreen(
+                      title: title,
+                      imagePath: item['image']!,
+                      description: item['description']!,
+                      materials: getTutorialMaterials(title),
+                      steps: getTutorialSteps(title),
+                      stepImages: getTutorialStepImages(title),
+                    ),
                   ),
-                ));
+                );
               },
             ),
           );

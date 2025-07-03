@@ -5,12 +5,12 @@ final List<Map<String, String>> imageData = [
     'description': 'Lavender is a soothing purple flower with fuzzy petals.',
   },
   {
-    'title': 'Feature 2',
+    'title': 'Sunflower',
     'image': 'lib/assets/f2.jpg',
     'description': 'Feature 2 is an elegant creation perfect for gifting.',
   },
   {
-    'title': 'Feature 3',
+    'title': 'lily',
     'image': 'lib/assets/f3.jpg',
     'description': 'This is a charming flower with vibrant petals.',
   },

@@ -81,7 +81,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
   Widget buildMainScreen(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Bloozoom', style: TextStyle(fontWeight: FontWeight.bold, fontStyle: FontStyle.italic)),
+        title: const Text(
+          'Bloozoom',
+          style: TextStyle(fontWeight: FontWeight.bold, fontStyle: FontStyle.italic),
+        ),
         backgroundColor: Colors.pink[100],
       ),
       body: SingleChildScrollView(
@@ -89,7 +92,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const Text('Fuzzy Wire Flowers', style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold)),
+            const Text(
+              'Fuzzy Wire Flowers',
+              style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
+            ),
             const SizedBox(height: 10),
             TextField(
               controller: _searchController,
@@ -109,7 +115,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
             Column(
               children: List.generate((filteredData.length / 2).ceil(), (rowIndex) {
                 final first = filteredData[rowIndex * 2];
-                final second = (rowIndex * 2 + 1 < filteredData.length) ? filteredData[rowIndex * 2 + 1] : null;
+                final second = (rowIndex * 2 + 1 < filteredData.length)
+                    ? filteredData[rowIndex * 2 + 1]
+                    : null;
                 return Row(
                   children: [
                     Expanded(child: _buildBox(first, context)),
@@ -127,17 +135,23 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
   Widget _buildBox(Map<String, String> item, BuildContext context) {
     final isFavorite = favorites.contains(item);
+    final String title = item['title']!;
 
     return GestureDetector(
       onTap: () {
-        Navigator.push(context, MaterialPageRoute(
-          builder: (_) => TutorialScreen(
-            title: item['title']!,
-            imagePath: item['image']!,
-            description: item['description']!,
-            steps: getTutorialSteps(item['title']!),
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (_) => TutorialScreen(
+              title: title,
+              imagePath: item['image']!,
+              description: item['description']!,
+              materials: getTutorialMaterials(title),
+              steps: getTutorialSteps(title),
+              stepImages: getTutorialStepImages(title),
+            ),
           ),
-        ));
+        );
       },
       child: Container(
         margin: const EdgeInsets.only(bottom: 15),
@@ -154,20 +168,34 @@ class _ProfileScreenState extends State<ProfileScreen> {
               children: [
                 ClipRRect(
                   borderRadius: BorderRadius.circular(8),
-                  child: Image.asset(item['image']!, height: 140, width: double.infinity, fit: BoxFit.cover),
+                  child: Image.asset(
+                    item['image']!,
+                    height: 140,
+                    width: double.infinity,
+                    fit: BoxFit.cover,
+                  ),
                 ),
                 Positioned(
                   bottom: 5,
                   left: 5,
                   child: GestureDetector(
                     onTap: () => toggleFavorite(item),
-                    child: Icon(isFavorite ? Icons.favorite : Icons.favorite_border, color: Colors.red),
+                    child: Icon(
+                      isFavorite ? Icons.favorite : Icons.favorite_border,
+                      color: Colors.red,
+                    ),
                   ),
                 ),
               ],
             ),
             const SizedBox(height: 10),
-            Text(item['title']!, style: TextStyle(color: Colors.purple[900], fontWeight: FontWeight.bold)),
+            Text(
+              item['title']!,
+              style: TextStyle(
+                color: Colors.purple[900],
+                fontWeight: FontWeight.bold,
+              ),
+            ),
           ],
         ),
       ),
