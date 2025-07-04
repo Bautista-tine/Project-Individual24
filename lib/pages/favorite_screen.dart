@@ -67,7 +67,6 @@ class FavoritesScreen extends StatelessWidget {
                       description: item['description']!,
                       materials: getTutorialMaterials(title),
                       steps: getTutorialSteps(title),
-                      stepImages: getTutorialStepImages(title),
                     ),
                   ),
                 );

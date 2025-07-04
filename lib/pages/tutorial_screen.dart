@@ -1,3 +1,4 @@
+
 import 'package:flutter/material.dart';
 
 class TutorialScreen extends StatelessWidget {
@@ -6,7 +7,6 @@ class TutorialScreen extends StatelessWidget {
   final String description;
   final List<String> materials;
   final List<String> steps;
-  final List<String> stepImages;
 
   const TutorialScreen({
     super.key,
@@ -15,7 +15,6 @@ class TutorialScreen extends StatelessWidget {
     required this.description,
     required this.materials,
     required this.steps,
-    required this.stepImages,
   });
 
   @override
@@ -68,17 +67,6 @@ class TutorialScreen extends StatelessWidget {
               const SizedBox(height: 10),
               for (int i = 0; i < steps.length; i++) ...[
                 Text('${i + 1}. ${steps[i]}', style: const TextStyle(fontSize: 16)),
-                const SizedBox(height: 8),
-                if (i < stepImages.length)
-                  ClipRRect(
-                    borderRadius: BorderRadius.circular(8),
-                    child: Image.asset(
-                      stepImages[i],
-                      height: 180,
-                      width: double.infinity,
-                      fit: BoxFit.cover,
-                    ),
-                  ),
                 const SizedBox(height: 20),
               ],
             ],

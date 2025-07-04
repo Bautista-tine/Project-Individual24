@@ -148,7 +148,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
               description: item['description']!,
               materials: getTutorialMaterials(title),
               steps: getTutorialSteps(title),
-              stepImages: getTutorialStepImages(title),
             ),
           ),
         );
