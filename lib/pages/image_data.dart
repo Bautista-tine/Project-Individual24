@@ -35,7 +35,7 @@ final List<Map<String, String>> imageData = [
     'description': 'A cherry-inspired fuzzy piece that’s super sweet.',
   },
   {
-    'title': 'Keychain',
+    'title': 'petal flower',
     'image': 'lib/assets/key.jpg',
     'description': 'Minimalist keychain with delicate floral touches.',
   },
