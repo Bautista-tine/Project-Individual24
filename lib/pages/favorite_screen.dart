@@ -1,3 +1,4 @@
+import 'dart:io';
 import 'package:flutter/material.dart';
 import 'tutorial_screen.dart';
 import 'package:finalproject24/pages/tutorial_steps.dart';
@@ -27,6 +28,7 @@ class FavoritesScreen extends StatelessWidget {
         itemBuilder: (context, index) {
           final item = favorites[index];
           final String title = item['title']!;
+          final String imagePath = item['image']!;
 
           return Container(
             margin: const EdgeInsets.only(bottom: 15),
@@ -38,21 +40,28 @@ class FavoritesScreen extends StatelessWidget {
             child: ListTile(
               leading: ClipRRect(
                 borderRadius: BorderRadius.circular(6),
-                child: Image.asset(
-                  item['image']!,
+                child: imagePath.startsWith('lib/assets/')
+                    ? Image.asset(
+                  imagePath,
+                  width: 50,
+                  height: 50,
+                  fit: BoxFit.cover,
+                )
+                    : Image.file(
+                  File(imagePath),
                   width: 50,
                   height: 50,
                   fit: BoxFit.cover,
                 ),
               ),
               title: Text(
-                item['title']!,
+                title,
                 style: TextStyle(
                   color: Colors.purple[900],
                   fontWeight: FontWeight.bold,
                 ),
               ),
-              subtitle: Text(item['description']!),
+              subtitle: Text(item['description'] ?? ''),
               trailing: IconButton(
                 icon: const Icon(Icons.remove_circle_outline, color: Colors.red),
                 onPressed: () => onToggleFavorite(item),
@@ -63,7 +72,7 @@ class FavoritesScreen extends StatelessWidget {
                   MaterialPageRoute(
                     builder: (_) => TutorialScreen(
                       title: title,
-                      imagePath: item['image']!,
+                      imagePath: imagePath,
                       description: item['description']!,
                       materials: getTutorialMaterials(title),
                       steps: getTutorialSteps(title),

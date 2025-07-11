@@ -250,9 +250,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
   Future<void> _showAddFlowerModal(BuildContext context) async {
     final TextEditingController titleController = TextEditingController();
     final TextEditingController descriptionController = TextEditingController();
-    final TextEditingController materialsController = TextEditingController();
-    final TextEditingController stepsController = TextEditingController();
-
+    final List<TextEditingController> materialControllers = [TextEditingController()];
+    final List<TextEditingController> stepControllers = [TextEditingController()];
     String? pickedImagePath;
 
     await showModalBottomSheet(
@@ -268,60 +267,100 @@ class _ProfileScreenState extends State<ProfileScreen> {
           right: 20,
           top: 20,
         ),
-        child: SingleChildScrollView(
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              const Text('Add New Flower', style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
-              const SizedBox(height: 10),
-              TextField(controller: titleController, decoration: const InputDecoration(labelText: 'Flower Name')),
-              TextField(controller: descriptionController, decoration: const InputDecoration(labelText: 'Description')),
-              TextField(controller: materialsController, decoration: const InputDecoration(labelText: 'Materials (comma-separated)')),
-              TextField(controller: stepsController, decoration: const InputDecoration(labelText: 'Steps (comma-separated)')),
-              const SizedBox(height: 10),
-              ElevatedButton.icon(
-                icon: const Icon(Icons.photo_library),
-                label: const Text('Pick Image from Gallery'),
-                onPressed: () async {
-                  final XFile? image = await _picker.pickImage(source: ImageSource.gallery);
-                  if (image != null) {
+        child: StatefulBuilder(
+          builder: (context, setModalState) => SingleChildScrollView(
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                const Text('Add New Flower', style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+                const SizedBox(height: 10),
+                TextField(controller: titleController, decoration: const InputDecoration(labelText: 'Flower Name')),
+                TextField(controller: descriptionController, decoration: const InputDecoration(labelText: 'Description')),
+
+                const SizedBox(height: 10),
+                const Text('Materials:', style: TextStyle(fontWeight: FontWeight.bold)),
+                ...materialControllers.map((c) => Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 5),
+                  child: TextField(controller: c, decoration: const InputDecoration(labelText: 'Material')),
+                )),
+                TextButton.icon(
+                  onPressed: () {
+                    setModalState(() => materialControllers.add(TextEditingController()));
+                  },
+                  icon: const Icon(Icons.add),
+                  label: const Text('Add Material'),
+                ),
+
+                const SizedBox(height: 10),
+                const Text('Steps:', style: TextStyle(fontWeight: FontWeight.bold)),
+                ...stepControllers.map((c) => Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 5),
+                  child: TextField(controller: c, decoration: const InputDecoration(labelText: 'Step')),
+                )),
+                TextButton.icon(
+                  onPressed: () {
+                    setModalState(() => stepControllers.add(TextEditingController()));
+                  },
+                  icon: const Icon(Icons.add),
+                  label: const Text('Add Step'),
+                ),
+
+                const SizedBox(height: 10),
+                ElevatedButton.icon(
+                  icon: const Icon(Icons.photo_library),
+                  label: const Text('Pick Image from Gallery'),
+                  onPressed: () async {
+                    final XFile? image = await _picker.pickImage(source: ImageSource.gallery);
+                    if (image != null) {
+                      setModalState(() {
+                        pickedImagePath = image.path;
+                      });
+                    }
+                  },
+                ),
+
+                const SizedBox(height: 20),
+                ElevatedButton(
+                  onPressed: () {
+                    if (titleController.text.trim().isEmpty ||
+                        descriptionController.text.trim().isEmpty ||
+                        pickedImagePath == null) {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        const SnackBar(content: Text('Please fill all fields and pick an image.')),
+                      );
+                      return;
+                    }
+
+                    final newItem = {
+                      'title': titleController.text.trim(),
+                      'image': pickedImagePath!,
+                      'description': descriptionController.text.trim(),
+                    };
+
+                    final materials = materialControllers
+                        .map((c) => c.text.trim())
+                        .where((text) => text.isNotEmpty)
+                        .toList();
+                    final steps = stepControllers
+                        .map((c) => c.text.trim())
+                        .where((text) => text.isNotEmpty)
+                        .toList();
+
                     setState(() {
-                      pickedImagePath = image.path;
+                      imageData.add(newItem);
+                      filteredData = imageData;
+                      tutorial_data.tutorialMaterials[titleController.text.trim()] = materials;
+                      tutorial_data.tutorialSteps[titleController.text.trim()] = steps;
                     });
-                  }
-                },
-              ),
-              const SizedBox(height: 20),
-              ElevatedButton(
-                onPressed: () {
-                  if (titleController.text.trim().isEmpty ||
-                      descriptionController.text.trim().isEmpty ||
-                      pickedImagePath == null) {
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      const SnackBar(content: Text('Please fill all fields and pick an image.')),
-                    );
-                    return;
-                  }
-                  final newItem = {
-                    'title': titleController.text.trim(),
-                    'image': pickedImagePath!,
-                    'description': descriptionController.text.trim(),
-                  };
-                  setState(() {
-                    imageData.add(newItem);
-                    filteredData = imageData;
-                    tutorial_data.tutorialSteps[titleController.text.trim()] =
-                        stepsController.text.trim().split(',').map((e) => e.trim()).toList();
-                    tutorial_data.tutorialMaterials[titleController.text.trim()] =
-                        materialsController.text.trim().split(',').map((e) => e.trim()).toList();
-                  });
-                  Navigator.pop(context);
-                },
-                style: ElevatedButton.styleFrom(backgroundColor: Colors.pink[100]),
-                child: const Text('Add Flower'),
-              ),
-              const SizedBox(height: 10),
-            ],
+
+                    Navigator.pop(context);
+                  },
+                  style: ElevatedButton.styleFrom(backgroundColor: Colors.pink[100]),
+                  child: const Text('Add Flower'),
+                ),
+                const SizedBox(height: 10),
+              ],
+            ),
           ),
         ),
       ),
