@@ -32,23 +32,47 @@ Map<String, List<String>> tutorialSteps = {
     'Shape a separate green pipe cleaner into a long, curved leaf and twist it around the stem.',
   ],
   'Strawberry': [
-    'Make a round fuzzy red body using wire.',
-    'Add green leaves on top using green pipe cleaner.',
-    'Attach a brown stem at the bottom.',
-    'Add yellow dots for seeds.',
+    'Take the red fuzzy wire and coil it into a cone shape — wider at the base and narrower at the top. Secure the end by twisting it.',
+    'Lightly glue on small black beads or use a black marker to add seed dots around the strawberry.',
+    'Cut a short piece of green fuzzy wire. Bend it into 2–3 tiny loops to form leaves and twist them together at the base.',
+    'Attach another small piece of green fuzzy wire to the leaves and twist it upward to act as the stem.',
+    'Twist the stem tightly around the keyring to secure the strawberry. Adjust the shape if needed.',
+  ],
+  'Ribbon':[
+    'Cut two fuzzy wires of equal length (about 6 inches each).',
+    'Form the ribbon shape by folding each wire into a loop (like the two loops of a ribbon), and twist the center to hold the loops.',
+    'Twist the second wire into a bow tail shape and attach it to the back of the ribbon loops.',
+    'Secure the center with a short piece of fuzzy wire, wrapping it tightly to hold the bow together.',
+    'Attach the keyring by twisting the excess wire through the ring and wrapping it firmly.',
+    '(Optional) Add decorations like beads or glue on tiny gems to the ribbon for extra flair.',
   ],
   'Cherry': [
-    'Form two red fuzzy balls with wire.',
-    'Connect them using a single green stem wire.',
-    'Add a felt leaf on top.',
-    'Adjust shape for symmetry.',
+    'Roll each red fuzzy wire into a tight ball to form a cherry. Twist the end to secure.',
+    'Fold the green fuzzy wire in half. Twist the middle part together, leaving both ends free to attach the cherries.',
+    'Twist one cherry to each loose end of the green stem wire. Adjust so they sit close together like real cherries.',
+    'Shape a small leaf with the remaining green wire by bending it into an oval and twisting it at the base.'
+    'Twist the top of the green stem wire around your keyring tightly. Use pliers if needed to secure firmly.',
   ],
-  'petal flower': [
+  'Petal Flower': [
     'Create a small flower head using fuzzy petals.',
     'Attach a small metal loop or keyring.',
     'Add optional beads for decoration.',
     'Tighten and wrap ends cleanly.',
   ],
+  'Rose': [
+    'Take the red fuzzy wire and roll one end into a tight spiral — this is the center of your rose.',
+    'Keep wrapping the wire around the center spiral loosely to form rose petals. Adjust the shape as you go.',
+    'Attach the green fuzzy wire to the base of the rose by twisting it securely.',
+    'Fold part of the green wire into a leaf shape on one or both sides, then twist it to secure.',
+    'Adjust the shape, trim any excess, and bend the stem slightly for a natural look.',
+  ],
+  'Lily of the Valley': [
+    'Take a white fuzzy wire, form a small loop (like a teardrop), and twist the ends to secure. Slightly pinch the top to resemble a bell. Repeat 3–5 times.',
+    'Take the green fuzzy wire and slightly bend it into a gentle curve (like a hook or cane).',
+    'Twist the base of each white bell flower around the green stem at intervals, starting from the top.',
+    'Cut and glue a leaf shape using green paper or bend a green fuzzy wire into a leaf shape and attach it near the bottom.',
+    'Space out the bell flowers and adjust the curve of the stem to resemble a natural Lily of the Valley.',
+    ]
 };
 
 Map<String, List<String>> tutorialMaterials = {
@@ -78,21 +102,42 @@ Map<String, List<String>> tutorialMaterials = {
     'Scissors',
   ],
   'Strawberry': [
-    'Red fuzzy wire',
-    'Green pipe cleaner',
-    'Yellow paint or dots',
+    '1 red fuzzy wire (for the strawberry body)',
+    '1 green fuzzy wire (for leaves and stem)',
+    '1 keyring',
+    'Optional: small black beads or black marker (for seeds)',
+  ],
+  'Ribbon': [
+    'Red or pink fuzzy wires (pipe cleaners)',
+    'A small keyring',
+    'Glue (optional, for securing)',
+    'Beads or gems (optional for decoration)',
+    'Scissors'
   ],
   'Cherry': [
-    'Red fuzzy wires',
-    'Green stem wire',
-    'Felt leaf',
+    '2 red fuzzy wires (for the cherries)',
+    '1 green fuzzy wire (for stem and leaf)',
+    '1 keyring',
     'Scissors',
+    'Small pliers (optional for twisting)',
   ],
-  'petal flower': [
+  'Petal Flower': [
     'Colored fuzzy wires',
     'Keyring',
     'Glue or beads',
     'Tape or thread',
+  ],
+  'Rose': [
+    'Red fuzzy wire',
+    'Green fuzzy wire',
+    'Green stem wire',
+    'Scissors',
+  ],
+  'Lily of the Valley': [
+    '1 green fuzzy wire (for the stem)',
+    '3–5 white fuzzy wires (for the bell-shaped flowers)',
+    'Optional: green paper or felt (for leaves)',
+    'Glue or small twist ties (optional for stability)',
   ],
 };
 

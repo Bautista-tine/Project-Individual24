@@ -105,7 +105,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
             TextField(
               controller: _searchController,
               decoration: InputDecoration(
-                hintText: 'Search features...',
+                hintText: 'Search flower...',
                 prefixIcon: const Icon(Icons.search, color: Colors.purple),
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(30),
@@ -218,7 +218,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         child: Text('Delete'),
                       ),
                     ],
-                    icon: const Icon(Icons.more_vert, color: Colors.grey),
+                    icon: const Icon(Icons.more_vert, color: Colors.purple),
                   ),
                 ),
               ],
@@ -279,10 +279,31 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
                 const SizedBox(height: 10),
                 const Text('Materials:', style: TextStyle(fontWeight: FontWeight.bold)),
-                ...materialControllers.map((c) => Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 5),
-                  child: TextField(controller: c, decoration: const InputDecoration(labelText: 'Material')),
-                )),
+                ...materialControllers.asMap().entries.map((entry) {
+                  int index = entry.key;
+                  TextEditingController controller = entry.value;
+                  return Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 5),
+                    child: Row(
+                      children: [
+                        Expanded(
+                          child: TextField(
+                            controller: controller,
+                            decoration: InputDecoration(labelText: 'Material ${index + 1}'),
+                          ),
+                        ),
+                        IconButton(
+                          icon: const Icon(Icons.delete, color: Colors.red),
+                          onPressed: () {
+                            if (materialControllers.length > 1) {
+                              setModalState(() => materialControllers.removeAt(index));
+                            }
+                          },
+                        ),
+                      ],
+                    ),
+                  );
+                }),
                 TextButton.icon(
                   onPressed: () {
                     setModalState(() => materialControllers.add(TextEditingController()));
@@ -293,10 +314,31 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
                 const SizedBox(height: 10),
                 const Text('Steps:', style: TextStyle(fontWeight: FontWeight.bold)),
-                ...stepControllers.map((c) => Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 5),
-                  child: TextField(controller: c, decoration: const InputDecoration(labelText: 'Step')),
-                )),
+                ...stepControllers.asMap().entries.map((entry) {
+                  int index = entry.key;
+                  TextEditingController controller = entry.value;
+                  return Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 5),
+                    child: Row(
+                      children: [
+                        Expanded(
+                          child: TextField(
+                            controller: controller,
+                            decoration: InputDecoration(labelText: 'Step ${index + 1}'),
+                          ),
+                        ),
+                        IconButton(
+                          icon: const Icon(Icons.delete, color: Colors.red),
+                          onPressed: () {
+                            if (stepControllers.length > 1) {
+                              setModalState(() => stepControllers.removeAt(index));
+                            }
+                          },
+                        ),
+                      ],
+                    ),
+                  );
+                }),
                 TextButton.icon(
                   onPressed: () {
                     setModalState(() => stepControllers.add(TextEditingController()));

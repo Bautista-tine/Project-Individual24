@@ -11,12 +11,12 @@ final List<Map<String, String>> imageData = [
   },
   {
     'title': 'lily',
-    'image': 'lib/assets/f3.jpg',
+    'image': 'lib/assets/lily.jpg',
     'description': 'This is a charming flower with vibrant petals.',
   },
   {
     'title': 'Tulip',
-    'image': 'lib/assets/f4.jpg',
+    'image': 'lib/assets/tulip.jpg',
     'description': 'Tulip is a classic bloom with smooth curves.',
   },
   {
@@ -26,7 +26,7 @@ final List<Map<String, String>> imageData = [
   },
   {
     'title': 'Ribbon',
-    'image': 'lib/assets/keychain2.jpg',
+    'image': 'lib/assets/ribbon.jpg',
     'description': 'A ribbon-style accessory that’s simple yet pretty.',
   },
   {
@@ -35,8 +35,21 @@ final List<Map<String, String>> imageData = [
     'description': 'A cherry-inspired fuzzy piece that’s super sweet.',
   },
   {
-    'title': 'petal flower',
+    'title': 'Petal Flower',
     'image': 'lib/assets/key.jpg',
     'description': 'Minimalist keychain with delicate floral touches.',
   },
+  {
+    'title': 'Rose',
+    'image': 'lib/assets/rose_updated.jpg',
+    'description': 'red rose with fuzzy petals',
+  },
+  {
+    'title': 'Lily of the Valley',
+    'image': 'lib/assets/lilyofthevalley.jpg',
+    'description': 'white lily with fuzzy petals',
+  },
+
+
+
 ];
